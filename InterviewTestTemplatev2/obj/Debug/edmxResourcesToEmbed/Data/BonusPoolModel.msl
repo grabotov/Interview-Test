@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MvcInterviewV3ModelStoreContainer" CdmEntityContainer="MvcInterviewV3Entities1">
+    <EntitySetMapping Name="HrDepartments">
+      <EntityTypeMapping TypeName="MvcInterviewV3Model.HrDepartment">
+        <MappingFragment StoreEntitySet="HrDepartment">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="BonusPoolAllocationPerc" ColumnName="BonusPoolAllocationPerc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HrEmployees">
+      <EntityTypeMapping TypeName="MvcInterviewV3Model.HrEmployee">
+        <MappingFragment StoreEntitySet="HrEmployee">
+          <ScalarProperty Name="Full_Name" ColumnName="Full Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FistName" ColumnName="FistName" />
+          <ScalarProperty Name="SecondName" ColumnName="SecondName" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="HrDepartmentId" ColumnName="HrDepartmentId" />
+          <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+          <ScalarProperty Name="Salary" ColumnName="Salary" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
