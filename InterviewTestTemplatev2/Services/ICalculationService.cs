@@ -1,4 +1,6 @@
-﻿using InterviewTestTemplatev2.Models;
+﻿using InterviewTestTemplatev2.Data;
+using InterviewTestTemplatev2.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace InterviewTestTemplatev2.Services
@@ -7,6 +9,8 @@ namespace InterviewTestTemplatev2.Services
     {
         //  ActionResult Calculate(BonusPoolCalculatorModel model);
          Task<BonusPoolCalculatorViewModel> GetAllEmployees();
-         Task<BonusPoolCalculatorResultModel> Calculate(BonusPoolCalculatorViewModel poolAmount);
+
+         Task<BonusPoolCalculatorResultModel> Calculate(int employee, int BonusPoolAmount);
+
     }
 }

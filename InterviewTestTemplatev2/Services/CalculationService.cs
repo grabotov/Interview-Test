@@ -35,28 +35,47 @@ namespace InterviewTestTemplatev2.Services
             return model;
         }
 
-        public async Task<BonusPoolCalculatorResultModel> Calculate(BonusPoolCalculatorViewModel poolAmount)
+        public async Task<BonusPoolCalculatorResultModel> Calculate(int employee,int BonusPoolAmount)
         {
-            int selectedEmployeeId = poolAmount.SelectedEmployeeId;
-            int totalBonusPool = poolAmount.BonusPoolAmount;
+            int selectedEmployeeId = employee;
+            int totalBonusPool = BonusPoolAmount;
 
+            decimal bonusPercentage = await CalculateEmployeePercentage(selectedEmployeeId, totalBonusPool);
+            int bonusAllocation =  CalculateBonusAllocation(bonusPercentage, totalBonusPool);
+            var result = await ChangeType(selectedEmployeeId, bonusAllocation);
+            return result;
+        }
+
+
+
+        private async Task<decimal> CalculateEmployeePercentage(int employee, int totalAmount)
+        {
             //load the details of the selected employee using the ID
-            HrEmployee hrEmployee = await _hrEmployeeRepo.SelectedEmployeeId(selectedEmployeeId);
+            HrEmployee hrEmployee = await _hrEmployeeRepo.SelectedEmployeeId(employee);
 
             int employeeSalary = hrEmployee.Salary;
 
             //get the total salary budget for the company
             int totalSalary = await _hrEmployeeRepo.GetSumSalary();
-            
-            //calculate the bonus allocation for the employee
-            decimal bonusPercentage = (decimal)employeeSalary / (decimal)totalSalary;
-            int bonusAllocation = (int)(bonusPercentage * totalBonusPool);
 
-            BonusPoolCalculatorResultModel result = new BonusPoolCalculatorResultModel();
-            result.hrEmployee = hrEmployee;
+            //calculate the bonus percentage for the employee
+            decimal bonusPercentage = employeeSalary / (decimal)totalSalary;
+
+            return bonusPercentage;
+        }
+
+        private int CalculateBonusAllocation(decimal bonusPercentage, int totalBonusPool)
+        {
+            int bonusAllocation = (int)(bonusPercentage * totalBonusPool);
+            return bonusAllocation;
+        }
+
+        private async Task<BonusPoolCalculatorResultModel> ChangeType(int employee, int bonusAllocation)
+        {
+            var result = new BonusPoolCalculatorResultModel();
+            result.hrEmployee = await _hrEmployeeRepo.SelectedEmployeeId(employee);
             result.bonusPoolAllocation = bonusAllocation;
             return result;
-            
         }
 
         protected virtual void Dispose(bool disposing)

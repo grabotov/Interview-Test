@@ -36,9 +36,9 @@ namespace InterviewTestTemplatev2.Controllers
                     return View();
                 }
             }
-            catch (Exception ex)
+            catch 
             {
-                throw new Exception();
+                throw;
             }
         }
 
@@ -49,7 +49,8 @@ namespace InterviewTestTemplatev2.Controllers
         {
             try
             {
-                var results = await _calculationService.Calculate(model);
+                
+                var results = await _calculationService.Calculate(model.SelectedEmployeeId, model.BonusPoolAmount);
                 if (results != null)
                 {
                     return View(results);
@@ -59,9 +60,9 @@ namespace InterviewTestTemplatev2.Controllers
                     return View();
                 }
             }
-            catch (Exception ex)
+            catch 
             {
-                throw new Exception();
+                throw;
             }
         }
 
