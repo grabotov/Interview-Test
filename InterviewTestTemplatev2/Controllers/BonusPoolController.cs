@@ -29,8 +29,8 @@ namespace InterviewTestTemplatev2.Controllers
                 if (results != null)
                 {
                     return View(results);
-
-                }
+                    
+                } 
                 else
                 {
                     return View();
@@ -42,10 +42,11 @@ namespace InterviewTestTemplatev2.Controllers
             }
         }
 
+
         //calculation 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> calculate(BonusPoolCalculatorViewModel model)
+        public async Task<ActionResult> Calculate(BonusPoolCalculatorViewModel model)
         {
             try
             {

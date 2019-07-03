@@ -5,6 +5,7 @@ using System.Web;
 using Unity;
 using InterviewTestTemplatev2.Services;
 using System.Web.Mvc;
+using InterviewTestTemplatev2.Repository;
 
 namespace InterviewTestTemplatev2.App_Start
 {
@@ -23,7 +24,8 @@ namespace InterviewTestTemplatev2.App_Start
         {
             container.RegisterType<ICalculationService, CalculationService>();
             container.RegisterType<IHrEmployeeRepo, HrEmployeeRepo>();
-
+            container.RegisterType<IDepartmentCalculationService, DepartmentCalculationService>();
+            container.RegisterType<IHrDepartmentRepo, HrDepartmentRepo>();
         }
     }
 }

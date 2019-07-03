@@ -1,0 +1,41 @@
+﻿@model List<InterviewTestTemplatev2.Models.BonusPoolEmployeeInDepartmentModel>
+
+
+@{
+    /**/
+
+    ViewBag.Title = "Caclulate";
+}
+
+<h2>Bonus Pool Allocation</h2>
+
+@*@<p>The bonus pool allocation for @Html.DisplayFor(model => model.EmployeeBonusPoolAmount) is: £@Html.DisplayFor(model => model.DepartmentBonusPoolAllocation)</p>
+*@
+
+
+<table class="table table-bordered table-responsive table-hover">
+
+
+    <tr>
+        <th>Name</th>
+        <th>Department Name</th>
+        <th>Employee Bonus Amount</th>
+        <th>Department Bonus Amount</th>
+        <th>Job title</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>   @Html.DisplayFor(ModelItem => item.HrEmployee)</td>
+            <td>   @Html.DisplayFor(ModelItem => item.DepartmentName)</td>
+            <td>    @Html.DisplayFor(ModelItem => item.EmployeeBonusPoolAmount)</td>
+            <td>  @Html.DisplayFor(ModelItem => item.DepartmentBonusPoolAllocation)</td>
+            <td>  @Html.DisplayFor(ModelItem => item.JobTitle)</td>
+        </tr>
+
+    }
+</table>
+
+<br />
+@Html.ActionLink("Click her to tip another Department", "Department")

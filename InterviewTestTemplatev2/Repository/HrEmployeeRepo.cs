@@ -1,17 +1,13 @@
 ﻿using InterviewTestTemplatev2.Data;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
 namespace InterviewTestTemplatev2.Services
 {
     public class HrEmployeeRepo : IHrEmployeeRepo
     {
-        readonly MvcInterviewContext dbContext = new MvcInterviewContext();
-
-        public HrEmployeeRepo()
-        {
-
-        }
+        private readonly MvcInterviewContext dbContext = new MvcInterviewContext();
 
         public async Task<IList<HrEmployee>> GetAllEmployees()
         {
@@ -27,11 +23,18 @@ namespace InterviewTestTemplatev2.Services
             return calledObject;
         }
 
+
         public async Task<int> GetSumSalary()
         {
             var calledObject = await dbContext.HrEmployees.SumAsync(sum => sum.Salary);
             return calledObject;
         }
+        
+        public async Task<IList<HrEmployee>> GetDepartmentEmployees(int departmentId)
+        {
+            var calledObject = await dbContext.HrEmployees.Where(x => x.HrDepartmentId == departmentId).ToListAsync();
+            return calledObject;
+        } 
 
     }
 }

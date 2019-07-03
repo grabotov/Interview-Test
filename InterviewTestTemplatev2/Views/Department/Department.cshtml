@@ -1,0 +1,44 @@
+﻿@model InterviewTestTemplatev2.Models.BonusPoolCalculatorViewModel
+@{
+    ViewBag.Title = "Department";
+
+}
+
+<h2>Bonus Pool Calculator for a department</h2>
+
+<p>
+    In order to calculate the bonus pool allocation for a particular department, please:
+    <br />
+    <br />
+    1. Enter in a valid amount for the total bonus pool<br />
+    2. Select a department for whom you wish to calculate the allocation<br />
+</p>
+
+
+@using (Html.BeginForm("Calculate", "Department", FormMethod.Post))
+{
+
+    @Html.AntiForgeryToken()
+    <div>
+        <table>
+            <tr>
+                <td>Bonus Pool Amount for all departments(£):</td>
+                <td>@Html.EditorFor(model => model.BonusPoolAmount)</td>
+            </tr>
+            <tr>
+                <td>Select a department to see how much money they would get allocated:</td>
+                <td>@Html.DropDownListFor(model => model.SelectedDepartmentId, new SelectList(Model.AllDepartments, "ID", "Title"))</td>
+                <td>@Html.LabelForModel(new Exception())</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Calculate" /></td>
+            </tr>
+        </table>
+
+    </div>
+
+    <br />
+    @Html.ActionLink("Click here to add bonus for an employee.", "Index", "BonusPool")
+
+}

@@ -14,27 +14,32 @@
     2. Select an employee for whom you wish to calculate the allocation<br />
 </p>
 
+
 @using (Html.BeginForm("Calculate", "BonusPool", FormMethod.Post))
 {
 
-@Html.AntiForgeryToken()
-<div>
-    <table>
-        <tr>
-            <td>Bonus Pool Amount (£):</td>
-            <td>@Html.EditorFor(model => model.BonusPoolAmount)</td>
-        </tr>
-        <tr>
-            <td>Employee:</td>
-            <td>@Html.DropDownListFor(model => model.SelectedEmployeeId, new SelectList(Model.AllEmployees,"ID", "Full_Name" ))</td>
-            <td>@Html.LabelForModel(new Exception())</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td><input type="submit" value="Calculate" /></td>
-        </tr>
-    </table>
+    @Html.AntiForgeryToken()
+    <div>
+        <table>
+            <tr>
+                <td>Bonus Pool Amount (£):</td>
+                <td>@Html.EditorFor(model => model.BonusPoolAmount)</td>
+            </tr>
+            <tr>
+                <td>Employee:</td>
+                <td>@Html.DropDownListFor(model => model.SelectedEmployeeId, new SelectList(Model.AllEmployees, "ID", "Full_Name"))</td>
+                <td>@Html.LabelForModel(new Exception())</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Calculate" /></td>
+            </tr>
+        </table>
 
-</div>
+    </div>
+
 
 }
+
+<br />
+@Html.ActionLink("Click here to tip the departments.", "Department", "Department")

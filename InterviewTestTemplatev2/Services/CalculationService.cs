@@ -30,6 +30,7 @@ namespace InterviewTestTemplatev2.Services
             var model = new BonusPoolCalculatorViewModel
                 {
                     AllEmployees = employees
+                    
                 };
 
             return model;
@@ -37,29 +38,29 @@ namespace InterviewTestTemplatev2.Services
 
         public async Task<BonusPoolCalculatorResultModel> Calculate(int employee,int BonusPoolAmount)
         {
-            int selectedEmployeeId = employee;
-            int totalBonusPool = BonusPoolAmount;
+            // Result model
+            HrEmployee hrEmployee = await _hrEmployeeRepo.SelectedEmployeeId(employee);
+            int salary = hrEmployee.Salary;
+            //Calc %
+            decimal bonusPercentage = await CalculateEmployeePercentage(BonusPoolAmount, salary);
+            // Calc bonus
+            int bonusAllocation = CalculateBonusAllocation(bonusPercentage, BonusPoolAmount);
+            //stick all in 1 var
+            var result =  ChangeType(hrEmployee, bonusAllocation);
 
-            decimal bonusPercentage = await CalculateEmployeePercentage(selectedEmployeeId, totalBonusPool);
-            int bonusAllocation =  CalculateBonusAllocation(bonusPercentage, totalBonusPool);
-            var result = await ChangeType(selectedEmployeeId, bonusAllocation);
             return result;
         }
 
 
 
-        private async Task<decimal> CalculateEmployeePercentage(int employee, int totalAmount)
+        private async Task<decimal> CalculateEmployeePercentage(int totalAmount, int salary)
         {
-            //load the details of the selected employee using the ID
-            HrEmployee hrEmployee = await _hrEmployeeRepo.SelectedEmployeeId(employee);
-
-            int employeeSalary = hrEmployee.Salary;
 
             //get the total salary budget for the company
             int totalSalary = await _hrEmployeeRepo.GetSumSalary();
 
             //calculate the bonus percentage for the employee
-            decimal bonusPercentage = employeeSalary / (decimal)totalSalary;
+            decimal bonusPercentage = salary / (decimal)totalSalary;
 
             return bonusPercentage;
         }
@@ -70,11 +71,11 @@ namespace InterviewTestTemplatev2.Services
             return bonusAllocation;
         }
 
-        private async Task<BonusPoolCalculatorResultModel> ChangeType(int employee, int bonusAllocation)
+        private BonusPoolCalculatorResultModel ChangeType(HrEmployee employee, int bonusAllocation)
         {
             var result = new BonusPoolCalculatorResultModel();
-            result.hrEmployee = await _hrEmployeeRepo.SelectedEmployeeId(employee);
-            result.bonusPoolAllocation = bonusAllocation;
+            result.HrEmployee = employee;
+            result.BonusPoolAllocation = bonusAllocation;
             return result;
         }
 
