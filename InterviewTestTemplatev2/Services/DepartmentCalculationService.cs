@@ -98,18 +98,23 @@ namespace InterviewTestTemplatev2.Services
 
             foreach (HrEmployee employee in departmentEmployeeList)
             {
-                //could put this calculation in another method or another class and inject it.
-                decimal bonusPoolAmountForEmployee = ((decimal)employee.Salary / (decimal)departmentSalarySum) * (decimal)bonusPoolAmount;
+                decimal employeeSalaryAllocation = CalculateSalaryPerEmployee(employee.Salary, departmentSalarySum, bonusPoolAmount);
                 result.Add(new BonusPoolEmployeeInDepartmentModel
                 {
                     DepartmentName = departmentName,
                     DepartmentBonusPoolAllocation = bonusPoolAmount,
                     HrEmployee = employee.Full_Name,
-                    EmployeeBonusPoolAmount = Convert.ToInt32(bonusPoolAmountForEmployee),
+                    EmployeeBonusPoolAmount = Convert.ToInt32(employeeSalaryAllocation),
                     JobTitle = employee.JobTitle
                 });
             }
             return await Task.FromResult(result);
+        }
+
+        private static decimal CalculateSalaryPerEmployee(int employeeSalary, int departmentSalarySum, int bonusPoolAmount)
+        {
+            decimal bonusPoolAmountForEmployee = ((decimal)employeeSalary / (decimal)departmentSalarySum) * (decimal)bonusPoolAmount;
+            return bonusPoolAmountForEmployee;
         }
 
         protected virtual void Dispose(bool disposing)
