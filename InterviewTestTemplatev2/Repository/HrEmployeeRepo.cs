@@ -9,7 +9,7 @@ namespace InterviewTestTemplatev2.Services
     {
         private readonly MvcInterviewContext dbContext = new MvcInterviewContext();
 
-        public async Task<IList<HrEmployee>> GetAllEmployees()
+        public async Task<List<HrEmployee>> GetAllEmployees()
         {
             var calledObject = await dbContext.HrEmployees.ToListAsync();
             
@@ -30,7 +30,7 @@ namespace InterviewTestTemplatev2.Services
             return calledObject;
         }
         
-        public async Task<IList<HrEmployee>> GetDepartmentEmployees(int departmentId)
+        public async Task<List<HrEmployee>> GetDepartmentEmployees(int departmentId)
         {
             var calledObject = await dbContext.HrEmployees.Where(x => x.HrDepartmentId == departmentId).ToListAsync();
             return calledObject;

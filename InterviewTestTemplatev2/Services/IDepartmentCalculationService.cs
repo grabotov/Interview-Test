@@ -11,6 +11,6 @@ namespace InterviewTestTemplatev2.Services
     {
         Task<BonusPoolCalculatorViewModel> GetAllDepartments();
         //Task<BonusPoolCalculatorResultModel> Calculate(int department, int bonusPoolAmount);
-        Task<IList<BonusPoolEmployeeInDepartmentModel>> DepartmentEmployeeProcess(int departmentId, int bonusPoolAmount);
+        Task<List<BonusPoolEmployeeInDepartmentModel>> DepartmentEmployeeProcess(int departmentId, int bonusPoolAmount);
     }
 }

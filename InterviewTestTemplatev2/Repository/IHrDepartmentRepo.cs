@@ -9,7 +9,7 @@ namespace InterviewTestTemplatev2.Repository
 {
     public interface IHrDepartmentRepo
     {
-        Task<IList<HrDepartment>> GetAllDepartments();
+        Task<List<HrDepartment>> GetAllDepartments();
         Task<HrDepartment> SelectedDepartmentId(int Id);
         Task<string> GetDepartmentName(int departmentID);
         Task<int> GetDepartmentSumSalary(int departmentID);

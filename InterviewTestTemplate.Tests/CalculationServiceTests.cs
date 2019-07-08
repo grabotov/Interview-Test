@@ -5,14 +5,21 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using InterviewTestTemplatev2.Data;
 using InterviewTestTemplatev2.Models;
+using InterviewTestTemplatev2.Repository;
+using System.Collections.Generic;
 
 namespace Tests
 {
+    [TestFixture]
     public class Tests
     {
+        private readonly Mock<IHrEmployeeRepo> mockEmployeeRepo = new Mock<IHrEmployeeRepo>();
+        private CalculationService sut;
+
         [SetUp]
         public void Setup()
         {
+            sut = new CalculationService(mockEmployeeRepo.Object);
         }
 
         [TestCase(500, 25000, 5000, 2500)]
@@ -21,9 +28,6 @@ namespace Tests
         public async Task Test1(int bonusPool, int employeeSalary, int totalSalary, int expectedBonusPoolAllocation)
         {
             //Arrange
-            var moq = new Mock<IHrEmployeeRepo>();
-
-            var calcService = new CalculationService(moq.Object);
             var userId = 1;
 
             var employee = new HrEmployee
@@ -32,10 +36,11 @@ namespace Tests
                 Salary = employeeSalary
             };
 
-            moq.Setup(repo => repo.SelectedEmployeeId(userId)).Returns(Task.FromResult(employee));
-            moq.Setup(repo => repo.GetSumSalary()).Returns(Task.FromResult(totalSalary));
+            mockEmployeeRepo.Setup(repo => repo.SelectedEmployeeId(userId)).Returns(Task.FromResult(employee));
+            mockEmployeeRepo.Setup(repo => repo.GetSumSalary()).Returns(Task.FromResult(totalSalary));
+            
             //Act
-            var result = await calcService.Calculate(userId, bonusPool);
+            var result = await sut.Calculate(userId, bonusPool);
 
             //Assert
             result.BonusPoolAllocation.Should().Be(expectedBonusPoolAllocation, $"Because the bonus pool {bonusPool} dividied by ");
@@ -43,29 +48,28 @@ namespace Tests
             result.HrEmployee.Should().Be(employee);
 
         }
-
-
+        
         [Test]
         public async Task ControllerTest()
         {
-
-            //arrange
+            //Arrange
             var userId = 1;
-            int bonuspool = 100;
+            int bonuspool = 1000;
             int totalSalary = 5000;
             var employee = new HrEmployee
             {
                 ID = userId,
+                Salary = totalSalary
             };
 
-            //act
-            var moq = new Mock<IHrEmployeeRepo>();
-            moq.Setup(repo => repo.SelectedEmployeeId(userId)).Returns(Task.FromResult(employee));
-            moq.Setup(repo => repo.GetSumSalary()).Returns(Task.FromResult(totalSalary));
+            
+            mockEmployeeRepo.Setup(repo => repo.SelectedEmployeeId(userId)).Returns(Task.FromResult(employee));
+            mockEmployeeRepo.Setup(repo => repo.GetSumSalary()).Returns(Task.FromResult(totalSalary));
 
-            var calcService = new CalculationService(moq.Object);
-            var result = await calcService.Calculate(userId, bonuspool);
-            //assert
+            //Act
+            var result = await sut.Calculate(userId, bonuspool);
+
+            //Assert
             result.Should().NotBeNull();
             result.Should().BeOfType<BonusPoolCalculatorResultModel>();
         }

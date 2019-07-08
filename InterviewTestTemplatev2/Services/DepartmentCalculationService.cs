@@ -29,7 +29,7 @@ namespace InterviewTestTemplatev2.Services
             return viewModel;
         }
 
-        private BonusPoolCalculatorViewModel MapEntitiesToViewModel(IList<HrDepartment> departments)
+        private BonusPoolCalculatorViewModel MapEntitiesToViewModel(List<HrDepartment> departments)
         {
             var model = new BonusPoolCalculatorViewModel
             {
@@ -66,7 +66,7 @@ namespace InterviewTestTemplatev2.Services
         //    return result;
         //}
 
-        public async Task<IList<BonusPoolEmployeeInDepartmentModel>> DepartmentEmployeeProcess(int departmentId, int bonusPoolAmount)
+        public async Task<List<BonusPoolEmployeeInDepartmentModel>> DepartmentEmployeeProcess(int departmentId, int bonusPoolAmount)
         {
             string departmentName = await _hrDepartmentRepo.GetDepartmentName(departmentId);
             //get employee list
@@ -74,13 +74,13 @@ namespace InterviewTestTemplatev2.Services
             //get DepartmentSalarySum
             int departmentSalarySum = await GetDepartmentSalarySum(departmentId);
             //Calculation method
-            IList<BonusPoolEmployeeInDepartmentModel> result = await EmployeeDepartmentCalculate(departmentEmployeeList, departmentSalarySum, bonusPoolAmount, departmentName);
+            List<BonusPoolEmployeeInDepartmentModel> result = await EmployeeDepartmentCalculate(departmentEmployeeList, departmentSalarySum, bonusPoolAmount, departmentName);
 
             //return the List
             return result;
         }
 
-        private async Task<IList<HrEmployee>> GetDepartmentEmployees (int departmentId)
+        private async Task<List<HrEmployee>> GetDepartmentEmployees (int departmentId)
         {
             var result = await _hrEmployeeRepo.GetDepartmentEmployees(departmentId);
             return result;
@@ -92,12 +92,13 @@ namespace InterviewTestTemplatev2.Services
             return result;
         }
 
-        private async Task<IList<BonusPoolEmployeeInDepartmentModel>> EmployeeDepartmentCalculate(IList<HrEmployee> departmentEmployeeList, int departmentSalarySum, int bonusPoolAmount, string departmentName)
+        private async Task<List<BonusPoolEmployeeInDepartmentModel>> EmployeeDepartmentCalculate(List<HrEmployee> departmentEmployeeList, int departmentSalarySum, int bonusPoolAmount, string departmentName)
         {
             var result = new List<BonusPoolEmployeeInDepartmentModel>();
 
             foreach (HrEmployee employee in departmentEmployeeList)
             {
+                //could put this calculation in another method or another class and inject it.
                 decimal bonusPoolAmountForEmployee = ((decimal)employee.Salary / (decimal)departmentSalarySum) * (decimal)bonusPoolAmount;
                 result.Add(new BonusPoolEmployeeInDepartmentModel
                 {

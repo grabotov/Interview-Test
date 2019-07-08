@@ -25,7 +25,7 @@ namespace InterviewTestTemplatev2.Services
             return viewModel;
         }
 
-        private BonusPoolCalculatorViewModel MapEntitiesToViewModel(IList<HrEmployee> employees)
+        private BonusPoolCalculatorViewModel MapEntitiesToViewModel(List<HrEmployee> employees)
         {
             var model = new BonusPoolCalculatorViewModel
                 {

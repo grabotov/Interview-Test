@@ -8,7 +8,7 @@ namespace InterviewTestTemplatev2.Services
     {
         Task<HrEmployee> SelectedEmployeeId(int Id);
         Task<int> GetSumSalary();
-        Task<IList<HrEmployee>> GetAllEmployees();
-        Task<IList<HrEmployee>> GetDepartmentEmployees(int departmentId);
+        Task<List<HrEmployee>> GetAllEmployees();
+        Task<List<HrEmployee>> GetDepartmentEmployees(int departmentId);
     }
 }

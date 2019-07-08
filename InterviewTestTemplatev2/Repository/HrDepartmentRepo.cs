@@ -14,7 +14,7 @@ namespace InterviewTestTemplatev2.Repository
         readonly MvcInterviewContext dbContext = new MvcInterviewContext();
 
 
-        public async Task<IList<HrDepartment>> GetAllDepartments()
+        public async Task<List<HrDepartment>> GetAllDepartments()
         {
             var calledObject = await dbContext.HrDepartments.ToListAsync();
             return calledObject;

@@ -1,0 +1,95 @@
+{
+  "format": 1,
+  "restore": {
+    "E:\\Interview Task Test\\InterviewTestTemplatev2\\InterviewTestTemplate.Tests\\InterviewTestTemplate.Tests.csproj": {}
+  },
+  "projects": {
+    "E:\\Interview Task Test\\InterviewTestTemplatev2\\InterviewTestTemplate.Tests\\InterviewTestTemplate.Tests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\Interview Task Test\\InterviewTestTemplatev2\\InterviewTestTemplate.Tests\\InterviewTestTemplate.Tests.csproj",
+        "projectName": "InterviewTestTemplate.Tests",
+        "projectPath": "E:\\Interview Task Test\\InterviewTestTemplatev2\\InterviewTestTemplate.Tests\\InterviewTestTemplate.Tests.csproj",
+        "packagesPath": "C:\\Users\\grabotov\\.nuget\\packages\\",
+        "outputPath": "E:\\Interview Task Test\\InterviewTestTemplatev2\\InterviewTestTemplate.Tests\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\grabotov\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {
+              "E:\\Interview Task Test\\InterviewTestTemplatev2\\InterviewTestTemplatev2\\InterviewTestTemplatev2.csproj": {
+                "projectPath": "E:\\Interview Task Test\\InterviewTestTemplatev2\\InterviewTestTemplatev2\\InterviewTestTemplatev2.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "FluentAssertions": {
+              "target": "Package",
+              "version": "[5.7.0, )"
+            },
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[15.9.0, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            },
+            "Moq": {
+              "target": "Package",
+              "version": "[4.12.0, )"
+            },
+            "NUnit3TestAdapter": {
+              "target": "Package",
+              "version": "[3.11.0, )"
+            },
+            "nunit": {
+              "target": "Package",
+              "version": "[3.11.0, )"
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    },
+    "E:\\Interview Task Test\\InterviewTestTemplatev2\\InterviewTestTemplatev2\\InterviewTestTemplatev2.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\Interview Task Test\\InterviewTestTemplatev2\\InterviewTestTemplatev2\\InterviewTestTemplatev2.csproj",
+        "projectName": "InterviewTestTemplatev2",
+        "projectPath": "E:\\Interview Task Test\\InterviewTestTemplatev2\\InterviewTestTemplatev2\\InterviewTestTemplatev2.csproj"
+      },
+      "frameworks": {
+        "net461": {}
+      }
+    }
+  }
+}
