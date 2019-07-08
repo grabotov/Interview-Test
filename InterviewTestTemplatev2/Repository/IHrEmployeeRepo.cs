@@ -10,5 +10,8 @@ namespace InterviewTestTemplatev2.Services
         Task<int> GetSumSalary();
         Task<List<HrEmployee>> GetAllEmployees();
         Task<List<HrEmployee>> GetDepartmentEmployees(int departmentId);
+        void Create(HrEmployee employee);
+        void Delete(int employeeID);
+        void Update(HrEmployee employee);
     }
 }
