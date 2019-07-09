@@ -370,11 +370,13 @@
     <Compile Include="Repository\HrEmployeeRepo.cs" />
     <Compile Include="Repository\IHrDepartmentRepo.cs" />
     <Compile Include="Repository\IHrEmployeeRepo.cs" />
+    <Compile Include="Services\HrEmployeeService.cs" />
     <Compile Include="Services\DepartmentCalculationService.cs" />
     <Compile Include="Services\DInjector.cs" />
     <Compile Include="Services\CalculationService.cs" />
     <Compile Include="Services\ICalculationService.cs" />
     <Compile Include="Services\IDepartmentCalculationService.cs" />
+    <Compile Include="Services\IHrEmployeeService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />

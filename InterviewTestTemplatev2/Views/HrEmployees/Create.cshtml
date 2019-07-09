@@ -42,7 +42,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.HrDepartmentId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.HrDepartmentId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.HrDepartmentId, this.Model.AllDepartments.Select(d => new SelectListItem { Text = d.Title, Value = d.ID.ToString() }))
+                @*@Html.EditorFor(model => model.HrDepartmentId, new { htmlAttributes = new { @class = "form-control" } })*@
                 @Html.ValidationMessageFor(model => model.HrDepartmentId, "", new { @class = "text-danger" })
             </div>
         </div>

@@ -19,7 +19,7 @@ namespace InterviewTestTemplatev2.Services
         // GET: BonusPool
         public async Task<BonusPoolCalculatorViewModel> GetAllEmployees()
         {
-            var viewModelList = await _hrEmployeeRepo.GetAllEmployees();
+            var viewModelList = _hrEmployeeRepo.GetAllEmployees();
             var viewModel = MapEntitiesToViewModel(viewModelList);
             
             return viewModel;
@@ -39,7 +39,7 @@ namespace InterviewTestTemplatev2.Services
         public async Task<BonusPoolCalculatorResultModel> Calculate(int employee,int BonusPoolAmount)
         {
             // Result model
-            HrEmployee hrEmployee = await _hrEmployeeRepo.SelectedEmployeeId(employee);
+            HrEmployee hrEmployee =  _hrEmployeeRepo.SelectedEmployeeId(employee);
             int salary = hrEmployee.Salary;
             //Calc %
             decimal bonusPercentage = await CalculateEmployeePercentage(BonusPoolAmount, salary);
@@ -57,7 +57,7 @@ namespace InterviewTestTemplatev2.Services
         {
 
             //get the total salary budget for the company
-            int totalSalary = await _hrEmployeeRepo.GetSumSalary();
+            int totalSalary =  _hrEmployeeRepo.GetSumSalary();
 
             //calculate the bonus percentage for the employee
             decimal bonusPercentage = salary / (decimal)totalSalary;

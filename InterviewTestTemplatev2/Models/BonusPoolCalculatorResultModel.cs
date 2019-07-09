@@ -7,9 +7,10 @@ namespace InterviewTestTemplatev2.Models
 {
     public class BonusPoolCalculatorResultModel
     {
-        public Data.HrEmployee HrEmployee;
-        public int BonusPoolAllocation;
-        public Data.HrDepartment HrDepartment;
+        //add get / set 
+        public Data.HrEmployee HrEmployee { get; set; }
+        public int BonusPoolAllocation { get; set; }
+        public Data.HrDepartment HrDepartment { get; set; }
 
     }
 }

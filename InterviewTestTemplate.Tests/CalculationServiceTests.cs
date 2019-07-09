@@ -36,8 +36,8 @@ namespace Tests
                 Salary = employeeSalary
             };
 
-            mockEmployeeRepo.Setup(repo => repo.SelectedEmployeeId(userId)).Returns(Task.FromResult(employee));
-            mockEmployeeRepo.Setup(repo => repo.GetSumSalary()).Returns(Task.FromResult(totalSalary));
+            mockEmployeeRepo.Setup(repo => repo.SelectedEmployeeId(userId)).Returns(employee);
+            mockEmployeeRepo.Setup(repo => repo.GetSumSalary()).Returns(totalSalary);
             
             //Act
             var result = await sut.Calculate(userId, bonusPool);
@@ -63,8 +63,8 @@ namespace Tests
             };
 
             
-            mockEmployeeRepo.Setup(repo => repo.SelectedEmployeeId(userId)).Returns(Task.FromResult(employee));
-            mockEmployeeRepo.Setup(repo => repo.GetSumSalary()).Returns(Task.FromResult(totalSalary));
+            mockEmployeeRepo.Setup(repo => repo.SelectedEmployeeId(userId)).Returns(employee);
+            mockEmployeeRepo.Setup(repo => repo.GetSumSalary()).Returns(totalSalary);
 
             //Act
             var result = await sut.Calculate(userId, bonuspool);

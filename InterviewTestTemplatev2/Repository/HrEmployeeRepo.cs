@@ -9,30 +9,30 @@ namespace InterviewTestTemplatev2.Services
     {
         private readonly MvcInterviewContext _dbContext = new MvcInterviewContext();
         
-        public async Task<List<HrEmployee>> GetAllEmployees()
+        public List<HrEmployee> GetAllEmployees()
         {
-            var calledObject = await _dbContext.HrEmployees.ToListAsync();
+            var calledObject =  _dbContext.HrEmployees.ToList();
             
             return calledObject;
         }
 
-        public async Task<HrEmployee> SelectedEmployeeId(int Id)
+        public HrEmployee SelectedEmployeeId(int Id)
         {
-            var calledObject = await _dbContext.HrEmployees.FirstOrDefaultAsync(o => o.ID == Id);
+            var calledObject =  _dbContext.HrEmployees.FirstOrDefault(o => o.ID == Id);
             
             return calledObject;
         }
 
 
-        public async Task<int> GetSumSalary()
+        public int GetSumSalary()
         {
-            var calledObject = await _dbContext.HrEmployees.SumAsync(sum => sum.Salary);
+            var calledObject =  _dbContext.HrEmployees.Sum(sum => sum.Salary);
             return calledObject;
         }
         
-        public async Task<List<HrEmployee>> GetDepartmentEmployees(int departmentId)
+        public List<HrEmployee> GetDepartmentEmployees(int departmentId)
         {
-            var calledObject = await _dbContext.HrEmployees.Where(x => x.HrDepartmentId == departmentId).ToListAsync();
+            var calledObject =  _dbContext.HrEmployees.Where(x => x.HrDepartmentId == departmentId).ToList();
             return calledObject;
         } 
 

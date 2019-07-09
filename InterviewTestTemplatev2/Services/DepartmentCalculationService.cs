@@ -24,7 +24,7 @@ namespace InterviewTestTemplatev2.Services
         // GET: BonusPool
         public async Task<BonusPoolCalculatorViewModel> GetAllDepartments()
         {
-            var viewModelList = await _hrDepartmentRepo.GetAllDepartments();
+            var viewModelList =  _hrDepartmentRepo.GetAllDepartments();
             var viewModel = MapEntitiesToViewModel(viewModelList);
             return viewModel;
         }
@@ -66,15 +66,15 @@ namespace InterviewTestTemplatev2.Services
         //    return result;
         //}
 
-        public async Task<List<BonusPoolEmployeeInDepartmentModel>> DepartmentEmployeeProcess(int departmentId, int bonusPoolAmount)
+        public async Task<IEnumerable<BonusPoolEmployeeInDepartmentModel>> DepartmentEmployeeProcess(int departmentId, int bonusPoolAmount)
         {
-            string departmentName = await _hrDepartmentRepo.GetDepartmentName(departmentId);
+            string departmentName =  _hrDepartmentRepo.GetDepartmentName(departmentId);
             //get employee list
             var departmentEmployeeList = await GetDepartmentEmployees(departmentId);
             //get DepartmentSalarySum
-            int departmentSalarySum = await GetDepartmentSalarySum(departmentId);
+            int departmentSalarySum = departmentEmployeeList.Sum(e => e.Salary);
             //Calculation method
-            List<BonusPoolEmployeeInDepartmentModel> result = await EmployeeDepartmentCalculate(departmentEmployeeList, departmentSalarySum, bonusPoolAmount, departmentName);
+            var result =  EmployeeDepartmentCalculate(departmentEmployeeList, departmentSalarySum, bonusPoolAmount, departmentName);
 
             //return the List
             return result;
@@ -82,33 +82,24 @@ namespace InterviewTestTemplatev2.Services
 
         private async Task<List<HrEmployee>> GetDepartmentEmployees (int departmentId)
         {
-            var result = await _hrEmployeeRepo.GetDepartmentEmployees(departmentId);
+            var result =  _hrEmployeeRepo.GetDepartmentEmployees(departmentId);
             return result;
         }
 
-        private async Task<int> GetDepartmentSalarySum(int departmentId)
+        private IEnumerable<BonusPoolEmployeeInDepartmentModel> EmployeeDepartmentCalculate(List<HrEmployee> departmentEmployeeList, int departmentSalarySum, int bonusPoolAmount, string departmentName)
         {
-            int result = await _hrDepartmentRepo.GetDepartmentSumSalary(departmentId);
-            return result;
-        }
-
-        private async Task<List<BonusPoolEmployeeInDepartmentModel>> EmployeeDepartmentCalculate(List<HrEmployee> departmentEmployeeList, int departmentSalarySum, int bonusPoolAmount, string departmentName)
-        {
-            var result = new List<BonusPoolEmployeeInDepartmentModel>();
-
             foreach (HrEmployee employee in departmentEmployeeList)
             {
                 decimal employeeSalaryAllocation = CalculateSalaryPerEmployee(employee.Salary, departmentSalarySum, bonusPoolAmount);
-                result.Add(new BonusPoolEmployeeInDepartmentModel
+                yield return new BonusPoolEmployeeInDepartmentModel
                 {
                     DepartmentName = departmentName,
                     DepartmentBonusPoolAllocation = bonusPoolAmount,
                     HrEmployee = employee.Full_Name,
                     EmployeeBonusPoolAmount = Convert.ToInt32(employeeSalaryAllocation),
                     JobTitle = employee.JobTitle
-                });
+                };
             }
-            return await Task.FromResult(result);
         }
 
         private static decimal CalculateSalaryPerEmployee(int employeeSalary, int departmentSalarySum, int bonusPoolAmount)

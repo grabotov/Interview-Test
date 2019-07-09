@@ -64,10 +64,10 @@ namespace InterviewTestTemplate.Tests
                     }
             };
             
-            mockDepartmentRepo.Setup(repo => repo.GetDepartmentName(departmentID)).Returns(Task.FromResult(departmentName));
-            mockDepartmentRepo.Setup(repo => repo.GetDepartmentSumSalary(departmentID)).Returns(Task.FromResult(salarySum));
+            mockDepartmentRepo.Setup(repo => repo.GetDepartmentName(departmentID)).Returns(departmentName);
+            mockDepartmentRepo.Setup(repo => repo.GetDepartmentSumSalary(departmentID)).Returns(salarySum);
 
-            mockEmployeeRepo.Setup(repo => repo.GetDepartmentEmployees(departmentID)).Returns(Task.FromResult(list));
+            mockEmployeeRepo.Setup(repo => repo.GetDepartmentEmployees(departmentID)).Returns(list);
 
             //Act
             var actual = await sut.DepartmentEmployeeProcess(departmentID, bonusPoolAmount);

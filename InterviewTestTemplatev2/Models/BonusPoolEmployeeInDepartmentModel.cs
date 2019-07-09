@@ -7,10 +7,10 @@ namespace InterviewTestTemplatev2.Models
 {
     public class BonusPoolEmployeeInDepartmentModel
     {
-        public string DepartmentName;
-        public int DepartmentBonusPoolAllocation;
-        public string HrEmployee;
-        public int EmployeeBonusPoolAmount;
-        public string JobTitle;
+        public string DepartmentName { get; set; }
+        public int DepartmentBonusPoolAllocation { get; set; }
+        public string HrEmployee { get; set; }
+        public int EmployeeBonusPoolAmount { get; set; }
+        public string JobTitle { get; set; }
     }
 }

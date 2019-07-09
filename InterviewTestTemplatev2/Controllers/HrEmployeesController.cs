@@ -15,26 +15,26 @@ namespace InterviewTestTemplatev2.Controllers
 {
     public class HrEmployeesController : Controller
     {
-        private readonly IHrEmployeeRepo _hrEmployeeRepo;
-        private readonly IHrDepartmentRepo _hrDepartmentRepo;
-        public HrEmployeesController(IHrEmployeeRepo hrEmployeeRepo, IHrDepartmentRepo hrDepartmentRepo)
+        private readonly IHrEmployeeService _hrEmployeeService;
+
+        public HrEmployeesController(IHrEmployeeService hrEmployeeService)
         {
-            _hrEmployeeRepo = hrEmployeeRepo;
-            _hrDepartmentRepo = hrDepartmentRepo;
+            _hrEmployeeService = hrEmployeeService;
         }
 
         // GET: HrEmployees
         public async Task<ActionResult> Index()
         {
-            var employees = await _hrEmployeeRepo.GetAllEmployees();
+            // call service now
+            var employees = _hrEmployeeService.GetAllEmployees();
             return View(employees);
         }
 
         // GET: HrEmployees/Details/5
-        public async Task<ActionResult> Details(int id)
+        public ActionResult Details(int id)
         {
             
-            var hrEmployee = await _hrEmployeeRepo.SelectedEmployeeId(id);
+            var hrEmployee =   _hrEmployeeService.SelectedEmployeeId(id);
             if (hrEmployee == null)
             {
                 return HttpNotFound();
@@ -45,7 +45,9 @@ namespace InterviewTestTemplatev2.Controllers
         // GET: HrEmployees/Create
         public ActionResult Create()
         {
-            return View();
+            var originalModel = new Models.HrEmployees();
+            originalModel.AllDepartments =  _hrEmployeeService.GetAllDepartments();
+            return View(originalModel);
         }
 
         // POST: HrEmployees/Create
@@ -57,7 +59,7 @@ namespace InterviewTestTemplatev2.Controllers
         {
             if (ModelState.IsValid)
             {
-                 _hrEmployeeRepo.Create(hrEmployee);
+                 _hrEmployeeService.Create(hrEmployee);
                 return RedirectToAction("Index");
             }
 
@@ -65,10 +67,10 @@ namespace InterviewTestTemplatev2.Controllers
         }
 
         // GET: HrEmployees/Edit/5
-        public async Task<ActionResult> Edit(int id)
+        public ActionResult Edit(int id)
         {
            
-                HrEmployee hrEmployee = await _hrEmployeeRepo.SelectedEmployeeId(id);
+                HrEmployee hrEmployee =  _hrEmployeeService.SelectedEmployeeId(id);
                 if (hrEmployee == null)
                 {
                     return HttpNotFound();
@@ -87,16 +89,16 @@ namespace InterviewTestTemplatev2.Controllers
         {
             if (ModelState.IsValid)
             {
-                _hrEmployeeRepo.Update(employee);
+                _hrEmployeeService.Update(employee);
                 return RedirectToAction("Index");
             }
             return View(employee);
         }
 
         // GET: HrEmployees/Delete/5
-        public async Task<ActionResult> Delete(int id)
+        public ActionResult Delete(int id)
         {
-            HrEmployee hrEmployee = await _hrEmployeeRepo.SelectedEmployeeId(id);
+            HrEmployee hrEmployee =  _hrEmployeeService.SelectedEmployeeId(id);
             if (hrEmployee == null)
             {
                 return HttpNotFound();
@@ -109,7 +111,7 @@ namespace InterviewTestTemplatev2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-             _hrEmployeeRepo.Delete(id);
+             _hrEmployeeService.Delete(id);
             return RedirectToAction("Index");
         }
     }

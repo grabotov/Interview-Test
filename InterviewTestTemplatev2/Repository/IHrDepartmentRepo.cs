@@ -9,9 +9,9 @@ namespace InterviewTestTemplatev2.Repository
 {
     public interface IHrDepartmentRepo
     {
-        Task<List<HrDepartment>> GetAllDepartments();
-        Task<HrDepartment> SelectedDepartmentId(int Id);
-        Task<string> GetDepartmentName(int departmentID);
-        Task<int> GetDepartmentSumSalary(int departmentID);
+        List<HrDepartment> GetAllDepartments();
+        HrDepartment SelectedDepartmentId(int Id);
+        string GetDepartmentName(int departmentID);
+        int GetDepartmentSumSalary(int departmentID);
     }
 }

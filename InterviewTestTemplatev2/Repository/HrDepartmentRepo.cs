@@ -14,30 +14,28 @@ namespace InterviewTestTemplatev2.Repository
         readonly MvcInterviewContext dbContext = new MvcInterviewContext();
 
 
-        public async Task<List<HrDepartment>> GetAllDepartments()
+        public List<HrDepartment> GetAllDepartments()
         {
-            var calledObject = await dbContext.HrDepartments.ToListAsync();
+            var calledObject =  dbContext.HrDepartments.ToList();
             return calledObject;
         }
 
-        public async Task<HrDepartment> SelectedDepartmentId(int departmentID)
+        public HrDepartment SelectedDepartmentId(int departmentID)
         {
-            var calledObject = await dbContext.HrDepartments.FirstOrDefaultAsync(o => o.ID == departmentID);
+            var calledObject =  dbContext.HrDepartments.FirstOrDefault(o => o.ID == departmentID);
 
             return calledObject;
         }
-        public async Task<string> GetDepartmentName(int departmentID)
+        public string GetDepartmentName(int departmentID)
         {
-            var calledObject = await dbContext.HrDepartments.FirstOrDefaultAsync(o => o.ID == departmentID);
+            var calledObject =  dbContext.HrDepartments.FirstOrDefault(o => o.ID == departmentID);
 
             return calledObject.Title;
         }
-        public async Task<int> GetDepartmentSumSalary(int departmentID)
+        public int GetDepartmentSumSalary(int departmentID)
         {
-            var calledObject = await dbContext.HrEmployees.Where(x => x.HrDepartmentId == departmentID).SumAsync(sum => sum.Salary);
+            var calledObject =  dbContext.HrEmployees.Where(x => x.HrDepartmentId == departmentID).Sum(sum => sum.Salary);
             return calledObject;
         }
-
-
     }
 }

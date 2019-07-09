@@ -26,6 +26,7 @@ namespace InterviewTestTemplatev2.App_Start
             container.RegisterType<IHrEmployeeRepo, HrEmployeeRepo>();
             container.RegisterType<IDepartmentCalculationService, DepartmentCalculationService>();
             container.RegisterType<IHrDepartmentRepo, HrDepartmentRepo>();
+            container.RegisterType<IHrEmployeeService, HrEmployeeService>();
         }
     }
 }
